@@ -1,0 +1,43 @@
+<h1>Burget Muncher</h1>
+
+<h3>A list of delicious things between bread for you to take a byte out of!</h3>
+
+<hr>
+
+<h2>Uneaten Burgers</h2>
+
+<ul class="uneaten">
+  {{#each burgers}}
+    {{#unless devoured}}
+      {{> burgers/burger-block devoured=false}}
+    {{/unless}}
+  {{/each}}
+</ul>
+
+<h2>DEVOURED BURGERS</h2>
+
+<ul class="devoured-ul">
+  {{#each burgers}}
+    {{#if devoured}}
+      {{> burgers/burger-block devoured=true}}
+    {{/if}}
+  {{/each}}
+</ul>
+
+<hr>
+
+<h2>Add a Burger</h2>
+
+<form class="add-burger">
+  <div class="form-div">
+    <label for="burg-name">Burger Name:</label>
+    <input type="text" id="burg-name" name="burger_name">
+  </div>
+  <div class="form-div">
+    <label for="devoured">DEVOURED?</label>
+    <input type="radio" name="devoured" value="1">DEVOURED <br>
+    <input type="radio" name="devoured" value="0" checked>not DEVOURED... yet <br>
+  </div>
+
+  <button type="submit" class="new-burger-btn">Add Burger</button>
+</form>
