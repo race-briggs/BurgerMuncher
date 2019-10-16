@@ -1,0 +1,19 @@
+{
+  "name": "burgermuncher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/race-briggs/BurgerMuncher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/race-briggs/BurgerMuncher/issues"
+  },
+  "homepage": "https://github.com/race-briggs/BurgerMuncher#readme"
+}
