@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(router);
 
-app.engine("handlebars", exphbrs({defaultLayout: main}));
+app.engine("handlebars", exphbrs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
 app.listen(PORT, function(){
