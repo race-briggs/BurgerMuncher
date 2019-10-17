@@ -1,4 +1,4 @@
-##### BurgerMuncher
+# BurgerMuncher
 
 ## https://burger-muncher-app.herokuapp.com/
 
