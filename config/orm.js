@@ -25,6 +25,8 @@ function objectToSQL(object){
       array.push(key + "=" + value);
     }
   }
+
+  return array;
 };
 
 var orm = {
@@ -47,6 +49,7 @@ var orm = {
     });
   },
   updateOne: function(tableName, updateObj, condition, callBack){
+    console.log(updateObj)
     var queryString = "UPDATE " + tableName + " SET " + objectToSQL(updateObj) + " WHERE " + condition;
 
     console.log(queryString);

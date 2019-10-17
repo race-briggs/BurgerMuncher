@@ -1,45 +1,90 @@
-<h1>Burger Muncher</h1>
+<div class="jumbotron">
+  <h1 class="display-4">Burger Muncher</h1>
 
-<h3>A list of delicious things between bread for you to take a byte out of!</h3>
+  <h3 class="">A list of delicious things between bread for you to take a byte out of!</h3>
+</div>
+<hr class="my-4">
+
+<div class="container">
+<div class="row">
+  <div class="col-md-6">
+    <h2>Uneaten Burgers</h2>
+
+    <ul class="uneaten-ul">
+      {{#each burgers}}
+        {{#unless devoured}}
+          {{> burgers/burger-block devoured=true}}
+        {{/unless}}
+      {{/each}}
+    </ul>
+</div>
+<div class="col-md-6">
+  <h2>DEVOURED BURGERS</h2>
+
+  <ul class="devoured-ul">
+    {{#each burgers}}
+      {{#if devoured}}
+        {{> burgers/burger-block devoured=false}}
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>
+</div>
+</div>
 
 <hr>
 
-<h2>Uneaten Burgers</h2>
+<div class="form-container">
+  <h2>Add a Burger</h2>
 
-<ul class="uneaten-ul">
-  {{#each burgers}}
-    {{#unless devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/unless}}
-  {{/each}}
-</ul>
+  <form class="add-burger">
+    <div class="form-div">
+      <label for="burg-name">Burger Name:</label>
+      <input type="text" id="burg-name" name="burger_name">
+    </div>
+    <div class="form-div">
+      <label for="devoured">DEVOURED?</label> <br>
+      <input type="radio" name="devoured" value="1">DEVOURED <br>
+      <input type="radio" name="devoured" value="0" checked>not DEVOURED... yet <br>
+    </div>
 
-<hr>
+    <button type="submit" class="new-burger-btn btn btn-primary">Add Burger</button>
+  </form>
 
-<h2>DEVOURED BURGERS</h2>
+</div>
 
-<ul class="devoured-ul">
-  {{#each burgers}}
-    {{#if devoured}}
-      {{> burgers/burger-block devoured=true}}
-    {{/if}}
-  {{/each}}
-</ul>
+<script>
+  $(function () {
+      $('.devour-btn').on('click', function (event) {
+        console.log('click!')
+        var id = $(this).data("id");
+        var gotEaten = $(this).data('newdevoured');
+        console.log(gotEaten, id);
+        var getEaten = {
+          devoured: gotEaten
+        };
+        console.log(getEaten)
+        $.ajax('/api/burgers/' + id, {
+          type: "PUT",
+          data: getEaten
+        }).then(function () {
+          console.log('BURGER DEVOURED');
+          location.reload();
+        });
+      });
 
-<hr>
+      $('.add-burger').on('submit', function (event) {
+        event.preventDefault();
 
-<h2>Add a Burger</h2>
+        var newBurger = {
+          burger_name: $('#burg-name').val().trim(),
+          devoured: $('[name=devoured]:checked').val()
+        };
 
-<form class="add-burger">
-  <div class="form-div">
-    <label for="burg-name">Burger Name:</label>
-    <input type="text" id="burg-name" name="burger_name">
-  </div>
-  <div class="form-div">
-    <label for="devoured">DEVOURED?</label>
-    <input type="radio" name="devoured" value="1">DEVOURED <br>
-    <input type="radio" name="devoured" value="0" checked>not DEVOURED... yet <br>
-  </div>
-
-  <button type="submit" class="new-burger-btn">Add Burger</button>
-</form>
+        $.post('/api/burgers', newBurger).then(function () {
+          console.log('BURGER UP!');
+          location.reload();
+        })
+      })
+    })
+</script>

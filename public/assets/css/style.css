@@ -1,0 +1,12 @@
+.form-container {
+  margin: 2% auto;
+  text-align: center;
+}
+
+input[type=radio] {
+  margin: 10px 0;
+}
+
+li {
+  margin: 5px 0;
+}
